@@ -1,7 +1,7 @@
 // @TODO remove some wordlists
 import * as bip39 from 'bip39';
 import hdKey from 'hdkey';
-import { isValidPrivate, privateToPublic, publicToAddress } from 'ethereumjs-util';
+import { isValidPrivate, privateToPublic, publicToAddress } from 'ethereumjs-util/dist/account';
 import { publicToString } from 'minterjs-util';
 import bs58check from 'bs58check';
 
