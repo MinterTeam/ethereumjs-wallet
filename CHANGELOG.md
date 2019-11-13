@@ -1,3 +1,7 @@
+## 4.0.4 - 2019-11-13
+- drop safe-buffer dep
+- drop des.js dep, it's updated and no need to dedupe more
+
 ## 4.0.3 - 2019-11-13
 - update deps
 

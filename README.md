@@ -60,7 +60,6 @@ const wallet = walletFromMnemonic('surround tape away million into program organ
 Create a wallet instance based on a raw private key
 ```js
 import {walletFromPrivateKey} from 'minterjs-wallet';
-import {Buffer} from 'safe-buffer';
 const privateKeyBuffer = Buffer.from('ef2af2385681c490bc473c2f7e6097fc1a38e6f67b44b81a3350a6583aadd144', 'hex')
 const wallet = walletFromPrivateKey(privateKeyBuffer);
 ```

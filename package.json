@@ -1,6 +1,6 @@
 {
   "name": "minterjs-wallet",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Utilities for handling Minter keys",
   "main": "dist/cjs/index.js",
   "module": "src/index.js",
@@ -50,13 +50,11 @@
     "bip39": "^3.0.2",
     "bs58check": "^2.1.2",
     "buffer-es6": "github:shrpne/buffer-es6#fix-internal-is-buffer",
-    "des.js": "github:shrpne/des.js#fix-circular-deps",
     "elliptic": "^6.5.1",
     "ethereumjs-util": "^6.2.0",
     "hdkey": "^1.1.1",
     "minterjs-util": "0.14.0",
-    "parse-asn1": "github:shrpne/parse-asn1#update-asn1",
-    "safe-buffer": "^5.2.0"
+    "parse-asn1": "github:shrpne/parse-asn1#update-asn1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
