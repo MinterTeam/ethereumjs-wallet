@@ -2,7 +2,7 @@ import assert from 'assert';
 import * as bip39 from 'bip39';
 import { isValidPrivate } from 'ethereumjs-util';
 import Wallet, {
-    seedFromMnemonic, hdKeyFromSeed, walletFromPrivateKey, walletFromExtendedPrivateKey, walletFromMnemonic, generateWallet, isValidMnemonic,
+    seedFromMnemonic, hdKeyFromSeed, walletFromPrivateKey, walletFromMnemonic, generateWallet, isValidMnemonic,
 } from '~/src';
 
 const MNEMONIC = 'exercise fantasy smooth enough arrive steak demise donkey true employ jealous decide blossom bind someone';
@@ -85,7 +85,7 @@ describe('private key only wallet', () => {
     it('walletFromPrivateKey() should not accept invalid key', () => {
         assert.throws(() => {
             walletFromPrivateKey(Buffer.from('001122', 'hex'));
-        }, /^Error: Private key does not satisfy the curve requirements \(ie. it is invalid\)$/);
+        });
     });
     it('.getAddress() should work', () => {
         assert.strictEqual(wallet.getAddress().toString('hex'), '7633980c000139dd3bd24a3f54e06474fa941e16');
@@ -111,13 +111,6 @@ describe('walletFromMnemonic()', () => {
         assert.throws(() => {
             walletFromMnemonic('a b c d e f g h i j k l');
         });
-    });
-});
-
-describe('walletFromExtendedPrivateKey()', () => {
-    it('should work', () => {
-        const xprv = 'xprv9s21ZrQH143K4KqQx9Zrf1eN8EaPQVFxM2Ast8mdHn7GKiDWzNEyNdduJhWXToy8MpkGcKjxeFWd8oBSvsz4PCYamxR7TX49pSpp3bmHVAY';
-        assert.strictEqual(walletFromExtendedPrivateKey(xprv).getAddressString(), 'Mxb800bf5435f67c7ee7d83c3a863269969a57c57c');
     });
 });
 

@@ -1,3 +1,7 @@
+## 5.0.0 - 2020-08-11
+- **BREAKING** remove walletFromExtendedPrivateKey
+- update deps
+
 ## 4.0.4 - 2019-11-13
 - drop safe-buffer dep
 - drop des.js dep, it's updated and no need to dedupe more
@@ -30,24 +34,24 @@
 
 ## 3.0.0 - 2019-02-27
 Align package structure to other minterjs packages.
-- **BREAKING** dist/index.js now contain UMD build without es modules 
+- **BREAKING** dist/index.js now contain UMD build without es modules
 - add UMD and commonjs builds
 - replace `mocha` with `jest`
 - replace `standard` with `eslint`'s airbnb config
 - update deps
 
 ## 2.2.2 - 2019-02-18
-- Update deps 
+- Update deps
 - fix ethereumjs-util
 
 ## 2.2.1 - 2018-11-30
-- Update deps 
+- Update deps
 
 ## 2.2.0 - 2018-11-97
 - Add `generateMnemonic()` and `isValidMnemonic()` methods
 
 ## 2.1.1 - 2018-08-09
-- Move source to /src directory (from ethereumjs-wallet merge) 
+- Move source to /src directory (from ethereumjs-wallet merge)
 - Add `module` field to package.json
 
 ## 2.1.0 - 2018-07-18

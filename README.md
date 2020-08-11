@@ -64,13 +64,6 @@ const privateKeyBuffer = Buffer.from('ef2af2385681c490bc473c2f7e6097fc1a38e6f67b
 const wallet = walletFromPrivateKey(privateKeyBuffer);
 ```
 
-#### `walletFromExtendedPrivateKey(extendedPrivateKeyString)`
-Create an instance based on a BIP32 extended private key (xprv)
-```js
-import {walletFromExtendedPrivateKey} from 'minterjs-wallet';
-const wallet = walletFromExtendedPrivateKey('xprv9s21ZrQH143K4KqQx9Zrf1eN8EaPQVFxM2Ast8mdHn7GKiDWzNEyNdduJhWXToy8MpkGcKjxeFWd8oBSvsz4PCYamxR7TX49pSpp3bmHVAY');
-```
-
 
 ### Wallet instance methods:
 
@@ -89,7 +82,7 @@ wallet.getAddress();
 ```
 
 #### `.getMnemonic()`
-Return the mnemonic phrase: 12 words string. 
+Return the mnemonic phrase: 12 words string.
 **Note:** Only works with instance created/generated from mnemonic, otherwise it will throw an error.
 ```js
 wallet.getMnemonic();

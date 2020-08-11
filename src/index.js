@@ -1,9 +1,8 @@
 // @TODO remove some wordlists
 import * as bip39 from 'bip39';
-import hdKey from 'hdkey';
+import { HDKey as hdKey } from 'ethereum-cryptography/hdkey';
 import { isValidPrivate, privateToPublic, publicToAddress } from 'ethereumjs-util/dist/account';
 import { publicToString } from 'minterjs-util';
-import bs58check from 'bs58check';
 
 function assert(val, msg) {
     if (!val) {
@@ -34,7 +33,7 @@ export function hdKeyFromSeed(seed) {
  * @param {string} [mnemonic]
  * @constructor
  */
-const Wallet = function (priv, mnemonic) {
+const Wallet = function WalletConstructor(priv, mnemonic) {
     if (priv && mnemonic) {
         throw new Error('Cannot supply both a private and a mnemonic phrase to the constructor');
     }
@@ -82,49 +81,49 @@ Object.defineProperty(Wallet.prototype, 'pubKey', {
 /**
  * @return {string}
  */
-Wallet.prototype.getMnemonic = function () {
+Wallet.prototype.getMnemonic = function getMnemonic() {
     return this.mnemonic;
 };
 
 /**
  * @return {Buffer}
  */
-Wallet.prototype.getPrivateKey = function () {
+Wallet.prototype.getPrivateKey = function getPrivateKey() {
     return this.privKey;
 };
 
 /**
  * @return {string}
  */
-Wallet.prototype.getPrivateKeyString = function () {
+Wallet.prototype.getPrivateKeyString = function getPrivateKeyString() {
     return this.getPrivateKey().toString('hex');
 };
 
 /**
  * @return {Buffer}
  */
-Wallet.prototype.getPublicKey = function () {
+Wallet.prototype.getPublicKey = function getPublicKey() {
     return this.pubKey;
 };
 
 /**
  * @return {string}
  */
-Wallet.prototype.getPublicKeyString = function () {
+Wallet.prototype.getPublicKeyString = function getPublicKeyString() {
     return publicToString(this.getPublicKey());
 };
 
 /**
  * @return {Buffer}
  */
-Wallet.prototype.getAddress = function () {
+Wallet.prototype.getAddress = function getAddress() {
     return publicToAddress(this.pubKey);
 };
 
 /**
  * @return {string}
  */
-Wallet.prototype.getAddressString = function () {
+Wallet.prototype.getAddressString = function getAddressString() {
     return `Mx${this.getAddress().toString('hex')}`;
 };
 
@@ -153,17 +152,6 @@ export function walletFromMnemonic(mnemonic) {
  */
 export function walletFromPrivateKey(priv) {
     return new Wallet(priv);
-}
-
-/**
- * @param {string} priv
- * @return {Wallet}
- */
-export function walletFromExtendedPrivateKey(priv) {
-    assert(priv.slice(0, 4) === 'xprv', 'Not an extended private key');
-    const tmp = bs58check.decode(priv);
-    assert(tmp[45] === 0, 'Invalid extended private key');
-    return walletFromPrivateKey(tmp.slice(46));
 }
 
 /**
