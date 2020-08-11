@@ -6,7 +6,7 @@ import Wallet, {
 } from '~/src';
 
 const MNEMONIC = 'exercise fantasy smooth enough arrive steak demise donkey true employ jealous decide blossom bind someone';
-const PRIVATE_KEY = '5fa3a8b186f6cc2d748ee2d8c0eb7a905a7b73de0f2c34c5e7857c3b46f187da';
+const PRIVATE_KEY = '0x5fa3a8b186f6cc2d748ee2d8c0eb7a905a7b73de0f2c34c5e7857c3b46f187da';
 const fixturewallet = walletFromMnemonic(MNEMONIC);
 
 describe('seedFromMnemonic()', () => {
@@ -25,13 +25,13 @@ describe('hd key from mnemonic', () => {
         const hdKey = hdKeyFromSeed(seed);
         const privateKey = hdKey._privateKey.toString('hex');
         assert.strictEqual(privateKey.length, 64);
-        assert.strictEqual(privateKey, PRIVATE_KEY);
+        assert.strictEqual(`0x${privateKey}`, PRIVATE_KEY);
     });
 });
 
 describe('.getPrivateKey()', () => {
     it('should work', () => {
-        assert.strictEqual(fixturewallet.getPrivateKey().toString('hex'), PRIVATE_KEY);
+        assert.strictEqual(`0x${fixturewallet.getPrivateKey().toString('hex')}`, PRIVATE_KEY);
     });
 });
 
@@ -76,7 +76,7 @@ describe('generate random wallet', () => {
 });
 
 describe('private key only wallet', () => {
-    const privKey = Buffer.from(PRIVATE_KEY, 'hex');
+    const privKey = Buffer.from(PRIVATE_KEY.substr(2), 'hex');
     const wallet = walletFromPrivateKey(privKey);
     it('walletFromPrivateKey() should work', () => {
         assert.strictEqual(wallet.getPublicKey().toString('hex'),

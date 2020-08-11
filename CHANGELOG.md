@@ -1,3 +1,6 @@
+## 6.0.0 - 2020-08-11
+- **BREAKING** getPrivateKeyString now returns 0x-prefixed string
+
 ## 5.0.0 - 2020-08-11
 - **BREAKING** remove walletFromExtendedPrivateKey
 - update deps

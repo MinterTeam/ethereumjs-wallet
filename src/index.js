@@ -96,7 +96,7 @@ Wallet.prototype.getPrivateKey = function getPrivateKey() {
  * @return {string}
  */
 Wallet.prototype.getPrivateKeyString = function getPrivateKeyString() {
-    return this.getPrivateKey().toString('hex');
+    return `0x${this.getPrivateKey().toString('hex')}`;
 };
 
 /**
