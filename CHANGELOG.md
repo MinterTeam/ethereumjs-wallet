@@ -1,3 +1,6 @@
+## 6.1.0 - 2021-03-24
+- add `walletFromMnemonicAsync`, use it to get better performance in browser
+
 ## 6.0.0 - 2020-08-11
 - **BREAKING** getPrivateKeyString now returns 0x-prefixed string
 

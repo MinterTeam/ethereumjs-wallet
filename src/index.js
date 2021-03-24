@@ -20,20 +20,31 @@ export function seedFromMnemonic(mnemonic) {
 }
 
 /**
+ * BIP39 Master seed from mnemonic phrase (async)
+ * @param mnemonic - 12 words
+ * @return {Promise<Buffer>}
+ */
+export function seedFromMnemonicAsync(mnemonic) {
+    return bip39.mnemonicToSeed(mnemonic);
+}
+
+/**
  * BIP44 HD key from master seed
  * @param {Buffer} seed - 64 bytes
  * @return {HDKey}
  */
 export function hdKeyFromSeed(seed) {
+    // same as "m/44'/60'/0'/0/0"
     return hdKey.fromMasterSeed(seed).derive("m/44'/60'/0'/0").deriveChild(0);
 }
 
 /**
  * @param {Buffer} [priv]
  * @param {string} [mnemonic]
+ * @param {boolean} [doAsync]
  * @constructor
  */
-const Wallet = function WalletConstructor(priv, mnemonic) {
+const Wallet = function WalletConstructor(priv, mnemonic, doAsync) {
     if (priv && mnemonic) {
         throw new Error('Cannot supply both a private and a mnemonic phrase to the constructor');
     }
@@ -44,6 +55,16 @@ const Wallet = function WalletConstructor(priv, mnemonic) {
 
     if (mnemonic && !bip39.validateMnemonic(mnemonic)) {
         throw new Error('Invalid mnemonic phrase');
+    }
+
+    if (mnemonic && doAsync) {
+        return seedFromMnemonicAsync(mnemonic)
+            .then((seed) => {
+                this._privKey = hdKeyFromSeed(seed)._privateKey;
+                this._mnemonic = mnemonic;
+
+                return this;
+            });
     }
 
     if (mnemonic) {
@@ -143,6 +164,15 @@ export function generateWallet() {
  */
 export function walletFromMnemonic(mnemonic) {
     return new Wallet(null, mnemonic);
+}
+
+/**
+ * MinterWallet from mnemonic phrase
+ * @param {string} mnemonic - 12 words
+ * @return {Promise<Wallet>}
+ */
+export function walletFromMnemonicAsync(mnemonic) {
+    return new Wallet(null, mnemonic, true);
 }
 
 /**

@@ -2,7 +2,7 @@ import assert from 'assert';
 import * as bip39 from 'bip39';
 import { isValidPrivate } from 'ethereumjs-util';
 import Wallet, {
-    seedFromMnemonic, hdKeyFromSeed, walletFromPrivateKey, walletFromMnemonic, generateWallet, isValidMnemonic,
+    seedFromMnemonic, seedFromMnemonicAsync, hdKeyFromSeed, walletFromPrivateKey, walletFromMnemonic, walletFromMnemonicAsync, generateWallet, isValidMnemonic,
 } from '~/src';
 
 const MNEMONIC = 'exercise fantasy smooth enough arrive steak demise donkey true employ jealous decide blossom bind someone';
@@ -16,6 +16,14 @@ describe('seedFromMnemonic()', () => {
     });
     it('should have correct value', () => {
         assert.strictEqual(seedBuffer.toString('hex'), '4ca64bd07f7765099f856e554504900953f59bd874009b4905fca674158ea0563bd7c35b79bff3feb3b33fcbdcdb771b93338ea4f29fcb9cfbb2f570093878c1');
+    });
+});
+
+describe('seedFromMnemonicAsync()', () => {
+    it('should have correct value', async () => {
+        const seedBuffer = seedFromMnemonic(MNEMONIC);
+        const seedBufferAsync = await seedFromMnemonicAsync(MNEMONIC);
+        assert.strictEqual(seedBuffer.toString('hex'), seedBufferAsync.toString('hex'));
     });
 });
 
@@ -111,6 +119,12 @@ describe('walletFromMnemonic()', () => {
         assert.throws(() => {
             walletFromMnemonic('a b c d e f g h i j k l');
         });
+    });
+
+    it('async', async () => {
+        const wallet = walletFromMnemonic(MNEMONIC);
+        const walletAsync = await walletFromMnemonic(MNEMONIC);
+        assert.strictEqual(wallet.getPrivateKeyString(), walletAsync.getPrivateKeyString());
     });
 });
 

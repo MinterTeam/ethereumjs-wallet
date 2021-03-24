@@ -35,6 +35,8 @@ or from browser
 <script>
 const wallet = minterWallet.generateWallet();
 const wallet2 = minterWallet.walletFromMnemonic('...');
+// use async for better performance
+const wallet3 = await minterWallet.walletFromMnemonicAsync('...');
 </script>
 ```
 
@@ -54,6 +56,13 @@ Create a wallet instance based on BIP39 12 words mnemonic phrase
 ```js
 import {walletFromMnemonic} from 'minterjs-wallet';
 const wallet = walletFromMnemonic('surround tape away million into program organ tonight write prefer inform cool');
+```
+
+#### `walletFromMnemonicAsync(mnemonic)`
+Same as `walletFromMnemonic` but async and has better performance in browser, beacause it uses `window.crypto.subtle` under hood
+```js
+import {walletFromMnemonicAsync} from 'minterjs-wallet';
+const wallet = await walletFromMnemonicAsync('surround tape away million into program organ tonight write prefer inform cool');
 ```
 
 #### `walletFromPrivateKey(privateKey)`
